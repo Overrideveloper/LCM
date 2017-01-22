@@ -1,8 +1,10 @@
 #Owner: Overrideveloper
 #Description: LCM Program 
 
-from memory_profiler import memory_usage
+
 from datetime import datetime
+import os
+import psutil 
 startTime = datetime.now()
 
 #Creating a function that uses two parameters 
@@ -35,11 +37,8 @@ output = LCM(FirstNumber, LCM(SecondNumber, LCM(ThirdNumber, LCM(FourthNumber,Fi
 print ("The Lowest Common Multiple of the five numbers is: ")
 
 print (output)
-        
+process = psutil.Process(os.getpid())
+
 print ("The execution time is ",(datetime.now()- startTime))
-
-mem_usage = memory_usage(LCM)
-
-print('Memory usage (in chunks of .1 seconds): %s'% mem_usage)
-
-print('Maximum memory usage: %s'% max(mem_usage))
+print("Memory consumption in Kilobytes is: ")
+print(process.memory_info().rss / 1024)
